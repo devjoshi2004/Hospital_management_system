@@ -1,0 +1,8 @@
+{
+  "/(patientDashboard)/patient/patient-bookings/page": "app/(patientDashboard)/patient/patient-bookings/page.js",
+  "/(patientDashboard)/patient/book-doctor/page": "app/(patientDashboard)/patient/book-doctor/page.js",
+  "/(patientDashboard)/patient/profile/page": "app/(patientDashboard)/patient/profile/page.js",
+  "/(doctorDashboard)/doctor/page": "app/(doctorDashboard)/doctor/page.js",
+  "/(doctorDashboard)/doctor/appointments/[id]/page": "app/(doctorDashboard)/doctor/appointments/[id]/page.js",
+  "/(doctorDashboard)/doctor/profile/page": "app/(doctorDashboard)/doctor/profile/page.js"
+}
