@@ -1,0 +1,112 @@
+{
+  "admin": [
+    {
+      "id": "1",
+      "name": "admin",
+      "email": "admin@gmail.com",
+      "password": "Admin@123",
+      "role": "admin"
+    }
+  ],
+  "doctor": [
+    {
+      "id": "03b9d4db-1c95-18a6-95cb-b724d4048bee",
+      "fullName": "dev",
+      "email": "doctor@gmail.com",
+      "role": "doctor",
+      "phone": "9754256325",
+      "gender": "male",
+      "specialty": "dermatology",
+      "experience": "20",
+      "password": "doctor123"
+    },
+    {
+      "id": "4e3bf2e8-7f7d-9cdf-1c39-e6f2c795b3b0",
+      "fullName": "doctor",
+      "email": "doctor1@gmail.com",
+      "role": "doctor",
+      "phone": "5425698563",
+      "gender": "male",
+      "specialty": "dermatology",
+      "experience": "2",
+      "password": "doctor123"
+    },
+    {
+      "id": "181e3fee-2220-8e65-4123-03d8c0f5a89a",
+      "fullName": "Brandon Irwin",
+      "email": "vywub@mailinator.com",
+      "role": "doctor",
+      "phone": "+1 (309) 531-5855",
+      "gender": "male",
+      "specialty": "orthopedics",
+      "experience": "62",
+      "password": "Pa$$w0rd!"
+    }
+  ],
+  "patient": [
+    {
+      "id": "84558826-0601-57a9-7d83-cdca85ec3e98",
+      "fullName": "het",
+      "email": "patient@gmail.com",
+      "gender": "Male",
+      "role": "patient",
+      "password": "patient123",
+      "phone": "1254879653",
+      "lastVisit": "2025-02-16",
+      "age": ""
+    },
+    {
+      "id": "ed7c1ca3-b3da-721a-ffa0-adef5dcc924a",
+      "fullName": "kishan",
+      "email": "kishan@gmail.com",
+      "role": "patient",
+      "phone": "5423652145",
+      "gender": "male",
+      "password": "kishan123",
+      "age": "",
+      "lastVisit": "2025-02-22"
+    },
+    {
+      "id": "336188ba-1741-b770-85d8-bb8bb67c84d0",
+      "fullName": "Kirsten Kaufman",
+      "email": "siletywamo@mailinator.com",
+      "role": "patient",
+      "phone": "+91 4200755159",
+      "gender": "male",
+      "password": "Pa$$w0rd!"
+    }
+  ],
+  "appointment": [],
+  "other_fields": [
+    {
+      "id": "1",
+      "module_name": "awards",
+      "fields": [
+        {
+          "field_id": "custom_field_1",
+          "label": "Sponsor Name",
+          "data_type": "text",
+          "value": ""
+        },
+        {
+          "field_id": "custom_field_2",
+          "label": "Award Level",
+          "data_type": "radio",
+          "value": ""
+        },
+        {
+          "field_id": "custom_field_3",
+          "label": "Description",
+          "data_type": "textarea",
+          "value": ""
+        },
+        {
+          "field_id": "custom_field_4",
+          "label": "Nomination Deadline",
+          "data_type": "date",
+          "value": ""
+        }
+      ]
+    }
+  ]
+}
