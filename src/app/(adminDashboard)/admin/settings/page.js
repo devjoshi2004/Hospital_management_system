@@ -1,10 +1,10 @@
 import React from 'react'
-import SettingsPage from '@/components/admin/admin-setting'
+import Settings from '@/components/admin/admin-setting'
 
 const SettingsPage = () => {
   return (
     <div>
-      <SettingsPage />
+      <Settings />
     </div>
   )
 }
