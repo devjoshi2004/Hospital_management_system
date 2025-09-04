@@ -1,5 +1,5 @@
 
-const SettingsPage = () => {
+const Settings = () => {
  
 
     return (
@@ -79,5 +79,5 @@ const SettingsPage = () => {
     );
   };
   
-  export default SettingsPage;
+  export default Settings;
   
