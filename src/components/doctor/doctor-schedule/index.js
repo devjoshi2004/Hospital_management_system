@@ -27,7 +27,8 @@ const DoctorSchedule = () => {
     loading, 
     error, 
     success,
-    currentDoctor 
+    currentDoctor,
+    currentScheduleId 
   } = useSelector((state) => state.doctor);
 
   const [selectedDay, setSelectedDay] = useState(null);
@@ -35,7 +36,6 @@ const DoctorSchedule = () => {
   const [newSlot, setNewSlot] = useState({ start: "", end: "" });
   const [showHolidayModal, setShowHolidayModal] = useState(false);
   const [newHoliday, setNewHoliday] = useState({ date: "", reason: "" });
-  const [scheduleId, setScheduleId] = useState(null);
 
   // Initialize default schedule structure
   const defaultSchedule = {
@@ -53,11 +53,30 @@ const DoctorSchedule = () => {
   // Load doctor data and schedule on component mount
   useEffect(() => {
     const doctorId = localStorage.getItem('userId');
+    const userRole = localStorage.getItem('userRole');
+    
     if (doctorId) {
+      // Try to load schedule even if userRole is not 'doctor' (fallback)
       dispatch(fetchDoctorSchedule(doctorId));
       dispatch(fetchDoctorHolidays(doctorId));
+      
+      if (userRole !== 'doctor') {
+        console.warn("User role is not 'doctor', but attempting to load schedule with doctorId:", doctorId);
+      }
+    } else {
+      console.error("No userId found in localStorage");
+      // Show a more user-friendly error message
+      toast.error("Please login to access schedule management", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
     }
   }, [dispatch]);
+
 
   // Handle success and error messages
   useEffect(() => {
@@ -139,7 +158,26 @@ const DoctorSchedule = () => {
 
   const handleSaveSlots = async () => {
     const doctorId = localStorage.getItem('userId');
-    if (!doctorId) return;
+    const userRole = localStorage.getItem('userRole');
+    
+    // More flexible authentication check - allow if userRole is 'doctor' or if we have a valid doctorId
+    if (!doctorId) {
+      console.error("No doctor ID found in localStorage");
+      toast.error("Please login to manage your schedule", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+      return;
+    }
+    
+    // If userRole is not 'doctor', try to use the doctorId anyway (fallback)
+    if (userRole && userRole !== 'doctor') {
+      console.warn("User role is not 'doctor', but proceeding with doctorId:", doctorId);
+    }
 
     const updatedSchedule = {
       ...schedule,
@@ -150,14 +188,15 @@ const DoctorSchedule = () => {
       }
     };
 
+
     // Update local state immediately for better UX
     dispatch(updateLocalSchedule({ day: selectedDay, schedule: updatedSchedule[selectedDay] }));
 
     try {
-      if (scheduleId) {
+      if (currentScheduleId) {
         // Update existing schedule
         await dispatch(updateDoctorSchedule({ 
-          id: scheduleId, 
+          id: currentScheduleId, 
           scheduleData: { 
             doctorId, 
             schedule: updatedSchedule 
@@ -165,11 +204,10 @@ const DoctorSchedule = () => {
         })).unwrap();
       } else {
         // Create new schedule
-        const result = await dispatch(addDoctorSchedule({ 
+        await dispatch(addDoctorSchedule({ 
           doctorId, 
           schedule: updatedSchedule 
         })).unwrap();
-        setScheduleId(result.id);
       }
     } catch (error) {
       console.error('Failed to save schedule:', error);
@@ -420,7 +458,9 @@ const DoctorSchedule = () => {
                     Cancel
                   </button>
                   <button
-                    onClick={handleSaveSlots}
+                    onClick={() => {
+                      handleSaveSlots();
+                    }}
                     className="flex-1 flex items-center justify-center px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors"
                   >
                     <Save className="w-4 h-4 mr-2" />

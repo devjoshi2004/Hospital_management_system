@@ -40,13 +40,11 @@ const AddPatient = () => {
         .then((res) => {
           return res;
         });
-      console.log(addPatient);
     }catch(error){
       console.log("addpatient", error);
       
     }
     
-    console.log("Patient form submitted:", formData);
     router.push("/admin/patients");
   };
 

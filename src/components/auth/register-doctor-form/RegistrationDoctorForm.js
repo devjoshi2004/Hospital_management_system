@@ -53,13 +53,11 @@ const RegistrationDoctorForm = () => {
         .then((res) => {
           return res;
         });
-      console.log(register);
     } catch (error) {
       console.log("register add", error);
     }
 
     router.push("/login");
-    console.log("register", formData);
   };
 
   return (

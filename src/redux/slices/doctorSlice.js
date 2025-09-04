@@ -177,6 +177,7 @@ const initialState = {
   doctors: [],
   currentDoctor: null,
   doctorSchedule: {},
+  currentScheduleId: null,
   doctorHolidays: [],
   doctorAppointments: [],
   loading: false,
@@ -302,6 +303,7 @@ const doctorSlice = createSlice({
         if (action.payload && action.payload.length > 0) {
           const schedule = action.payload[0];
           state.doctorSchedule = schedule.schedule || {};
+          state.currentScheduleId = schedule.id;
         }
       })
       .addCase(fetchDoctorSchedule.rejected, (state, action) => {
@@ -316,6 +318,7 @@ const doctorSlice = createSlice({
       .addCase(addDoctorSchedule.fulfilled, (state, action) => {
         state.loading = false;
         state.doctorSchedule = action.payload.schedule;
+        state.currentScheduleId = action.payload.id;
         state.success = true;
       })
       .addCase(addDoctorSchedule.rejected, (state, action) => {

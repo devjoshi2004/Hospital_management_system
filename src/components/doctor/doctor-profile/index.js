@@ -34,7 +34,6 @@ const DoctorProfile = () => {
 
     if(storedUserId){
       setUserId(storedUserId);
-      console.log("🚀 ~ useEffect ~ storedUserId:", storedUserId)
 
       axiosInstance(`/doctor/${storedUserId.id}`)
       .then((response) => {
@@ -138,8 +137,6 @@ const DoctorProfile = () => {
       console.log(error);
     }
 
-    // Simulating password change success
-    console.log({ type: "success", text: "Password updated successfully!" });
 
     // Clear password fields
     setPasswordData({
