@@ -1,5 +1,5 @@
 import React from 'react'
-import SettingsPage from '@/components/admin-setting'
+import SettingsPage from '@/components/admin/admin-setting'
 
 const SettingsPage = () => {
   return (

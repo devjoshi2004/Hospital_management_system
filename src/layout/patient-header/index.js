@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Menu, X, User, Calendar, FileText, Home } from "lucide-react";
-import Logout from "../../components/logout/Logout";
+import Logout from "../../components/auth/logout/Logout";
 import ThemeToggle from "@/components/theme/ThemeToggle";
 
 const PatientHeader = () => {
