@@ -5,7 +5,7 @@ import { Users, Heart, Calendar, Settings, LogOut, LayoutDashboard } from "lucid
 import { logout } from "@/redux/slices/authSlice";
 import { usePathname } from "next/navigation";
 import { useDispatch } from "react-redux";
-import Logout from "../../components/logout/Logout";
+import Logout from "../../components/auth/logout/Logout";
 import ThemeToggle from "@/components/theme/ThemeToggle";
 import { useState } from "react";
 

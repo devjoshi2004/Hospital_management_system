@@ -1,5 +1,5 @@
 import React from 'react'
-import DoctorSchedule from '@/components/doctor-schedule'
+import DoctorSchedule from '@/components/doctor/doctor-schedule'
 
 const DoctorSchedulePage = () => {
   return (

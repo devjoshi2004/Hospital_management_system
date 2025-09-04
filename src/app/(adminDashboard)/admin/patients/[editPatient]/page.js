@@ -1,6 +1,6 @@
-import EditPatientPage from "@/components/dashboard/patient/EditPatientPage";
+import EditPatient from "@/components/admin/admin-edit-patient";
 
-export default async function EditPatient({params}) {
+export default async function EditPatientPage({params}) {
   const patientId = (await params).editPatient
-  return <EditPatientPage patientId={patientId} />;
+  return <EditPatient patientId={patientId} />;
 }

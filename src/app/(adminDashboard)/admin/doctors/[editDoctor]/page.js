@@ -1,6 +1,6 @@
-import EditDoctorPage from "@/components/dashboard/doctor/EditDoctorPage";
+import EditDoctor from "@/components/admin/admin-edit-doctor";
 
 export default async function EditPatient({ params }) {
   const doctorId = (await params).editDoctor
-  return <EditDoctorPage doctorId={doctorId} />;
+  return <EditDoctor doctorId={doctorId} />;
 }

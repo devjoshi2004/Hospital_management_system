@@ -1,4 +1,4 @@
-import PatientProfile from '@/components/paitent-profile'
+import PatientProfile from '@/components/patient/paitent-profile'
 import React from 'react'
 
 const ProfilePage = () => {

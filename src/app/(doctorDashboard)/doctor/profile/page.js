@@ -1,5 +1,5 @@
 import React from 'react'
-import DoctorProfile from '@/components/doctor-profile'
+import DoctorProfile from '@/components/doctor/doctor-profile'
 
 const DoctorProfilePage = () => {
   return (
