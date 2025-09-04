@@ -1,12 +1,44 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Calendar as CalendarIcon, Clock, Plus, X, Save, Trash2 } from "lucide-react";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {
+  fetchDoctorSchedule,
+  addDoctorSchedule,
+  updateDoctorSchedule,
+  fetchDoctorHolidays,
+  addDoctorHoliday,
+  deleteDoctorHoliday,
+  clearError,
+  clearSuccess,
+  updateLocalSchedule,
+  addLocalHoliday,
+  removeLocalHoliday,
+} from "@/redux/slices/doctorSlice";
 
 const DoctorSchedule = () => {
-  const [schedule, setSchedule] = useState({
+  const dispatch = useDispatch();
+  const { 
+    doctorSchedule, 
+    doctorHolidays, 
+    loading, 
+    error, 
+    success,
+    currentDoctor 
+  } = useSelector((state) => state.doctor);
+
+  const [selectedDay, setSelectedDay] = useState(null);
+  const [editingSlots, setEditingSlots] = useState([]);
+  const [newSlot, setNewSlot] = useState({ start: "", end: "" });
+  const [showHolidayModal, setShowHolidayModal] = useState(false);
+  const [newHoliday, setNewHoliday] = useState({ date: "", reason: "" });
+  const [scheduleId, setScheduleId] = useState(null);
+
+  // Initialize default schedule structure
+  const defaultSchedule = {
     monday: { isWorking: true, slots: ["09:00 AM - 01:00 PM", "02:00 PM - 06:00 PM"] },
     tuesday: { isWorking: true, slots: ["09:00 AM - 01:00 PM", "02:00 PM - 06:00 PM"] },
     wednesday: { isWorking: true, slots: ["09:00 AM - 01:00 PM", "02:00 PM - 06:00 PM"] },
@@ -14,17 +46,44 @@ const DoctorSchedule = () => {
     friday: { isWorking: true, slots: ["09:00 AM - 01:00 PM", "02:00 PM - 06:00 PM"] },
     saturday: { isWorking: false, slots: [] },
     sunday: { isWorking: false, slots: [] },
-  });
+  };
 
-  const [selectedDay, setSelectedDay] = useState(null);
-  const [editingSlots, setEditingSlots] = useState([]);
-  const [newSlot, setNewSlot] = useState({ start: "", end: "" });
-  const [showHolidayModal, setShowHolidayModal] = useState(false);
-  const [newHoliday, setNewHoliday] = useState({ date: "", reason: "" });
-  const [holidays, setHolidays] = useState([
-    { id: 1, date: "2024-02-25", reason: "Personal Leave" },
-    { id: 2, date: "2024-03-01", reason: "Conference" },
-  ]);
+  const schedule = Object.keys(doctorSchedule).length > 0 ? doctorSchedule : defaultSchedule;
+
+  // Load doctor data and schedule on component mount
+  useEffect(() => {
+    const doctorId = localStorage.getItem('userId');
+    if (doctorId) {
+      dispatch(fetchDoctorSchedule(doctorId));
+      dispatch(fetchDoctorHolidays(doctorId));
+    }
+  }, [dispatch]);
+
+  // Handle success and error messages
+  useEffect(() => {
+    if (success) {
+      toast.success('Operation completed successfully!', {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+      dispatch(clearSuccess());
+    }
+    if (error) {
+      toast.error(error, {
+        position: "top-right",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+      });
+      dispatch(clearError());
+    }
+  }, [success, error, dispatch]);
 
   const handleEditSlots = (day) => {
     setSelectedDay(day);
@@ -78,25 +137,46 @@ const DoctorSchedule = () => {
     setEditingSlots(editingSlots.filter((_, i) => i !== index));
   };
 
-  const handleSaveSlots = () => {
-    setSchedule(prev => ({
-      ...prev,
+  const handleSaveSlots = async () => {
+    const doctorId = localStorage.getItem('userId');
+    if (!doctorId) return;
+
+    const updatedSchedule = {
+      ...schedule,
       [selectedDay]: {
-        ...prev[selectedDay],
+        ...schedule[selectedDay],
         slots: editingSlots,
         isWorking: editingSlots.length > 0
       }
-    }));
+    };
+
+    // Update local state immediately for better UX
+    dispatch(updateLocalSchedule({ day: selectedDay, schedule: updatedSchedule[selectedDay] }));
+
+    try {
+      if (scheduleId) {
+        // Update existing schedule
+        await dispatch(updateDoctorSchedule({ 
+          id: scheduleId, 
+          scheduleData: { 
+            doctorId, 
+            schedule: updatedSchedule 
+          } 
+        })).unwrap();
+      } else {
+        // Create new schedule
+        const result = await dispatch(addDoctorSchedule({ 
+          doctorId, 
+          schedule: updatedSchedule 
+        })).unwrap();
+        setScheduleId(result.id);
+      }
+    } catch (error) {
+      console.error('Failed to save schedule:', error);
+    }
+
     setSelectedDay(null);
     setEditingSlots([]);
-    toast.success('Schedule updated successfully!', {
-      position: "top-right",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-    });
   };
 
   const handleCancelEdit = () => {
@@ -105,24 +185,28 @@ const DoctorSchedule = () => {
     setNewSlot({ start: "", end: "" });
   };
 
-  const handleAddHoliday = () => {
+  const handleAddHoliday = async () => {
     if (newHoliday.date && newHoliday.reason) {
+      const doctorId = localStorage.getItem('userId');
+      if (!doctorId) return;
+
       // Check for duplicate dates
-      const isDuplicate = holidays.some(holiday => holiday.date === newHoliday.date);
+      const isDuplicate = doctorHolidays.some(holiday => holiday.date === newHoliday.date);
       
       if (!isDuplicate) {
-        const newId = Math.max(...holidays.map(h => h.id), 0) + 1;
-        setHolidays([...holidays, { id: newId, ...newHoliday }]);
-        setNewHoliday({ date: "", reason: "" });
-        setShowHolidayModal(false);
-        toast.success('Holiday added successfully!', {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
+        try {
+          const holidayData = {
+            doctorId,
+            date: newHoliday.date,
+            reason: newHoliday.reason
+          };
+          
+          await dispatch(addDoctorHoliday(holidayData)).unwrap();
+          setNewHoliday({ date: "", reason: "" });
+          setShowHolidayModal(false);
+        } catch (error) {
+          console.error('Failed to add holiday:', error);
+        }
       } else {
         toast.error('A holiday already exists for this date. Please choose a different date.', {
           position: "top-right",
@@ -136,22 +220,33 @@ const DoctorSchedule = () => {
     }
   };
 
-  const handleRemoveHoliday = (id) => {
-    setHolidays(holidays.filter(holiday => holiday.id !== id));
-    toast.success('Holiday removed successfully!', {
-      position: "top-right",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-    });
+  const handleRemoveHoliday = async (id) => {
+    try {
+      await dispatch(deleteDoctorHoliday(id)).unwrap();
+    } catch (error) {
+      console.error('Failed to remove holiday:', error);
+    }
   };
 
   const handleCancelHoliday = () => {
     setNewHoliday({ date: "", reason: "" });
     setShowHolidayModal(false);
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-center h-64">
+            <div className="text-center">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+              <p className="text-gray-600 dark:text-gray-400">Loading schedule...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
@@ -210,7 +305,7 @@ const DoctorSchedule = () => {
               </button>
             </div>
             <div className="space-y-4">
-              {holidays.map((holiday) => (
+              {doctorHolidays.map((holiday) => (
                 <div
                   key={holiday.id}
                   className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-900 rounded-lg"
@@ -231,7 +326,7 @@ const DoctorSchedule = () => {
                   </button>
                 </div>
               ))}
-              {holidays.length === 0 && (
+              {doctorHolidays.length === 0 && (
                 <div className="text-center py-8">
                   <CalendarIcon className="w-12 h-12 text-gray-300 dark:text-gray-600 mx-auto mb-3" />
                   <p className="text-gray-500 dark:text-gray-400">No holidays scheduled</p>

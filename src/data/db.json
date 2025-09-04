@@ -77,6 +77,39 @@
     }
   ],
   "appointment": [],
+  "doctorSchedule": [
+    {
+      "id": "1",
+      "doctorId": "03b9d4db-1c95-18a6-95cb-b724d4048bee",
+      "schedule": {
+        "monday": { "isWorking": true, "slots": ["09:00 AM - 01:00 PM", "02:00 PM - 06:00 PM"] },
+        "tuesday": { "isWorking": true, "slots": ["09:00 AM - 01:00 PM", "02:00 PM - 06:00 PM"] },
+        "wednesday": { "isWorking": true, "slots": ["09:00 AM - 01:00 PM", "02:00 PM - 06:00 PM"] },
+        "thursday": { "isWorking": true, "slots": ["09:00 AM - 01:00 PM", "02:00 PM - 06:00 PM"] },
+        "friday": { "isWorking": true, "slots": ["09:00 AM - 01:00 PM", "02:00 PM - 06:00 PM"] },
+        "saturday": { "isWorking": false, "slots": [] },
+        "sunday": { "isWorking": false, "slots": [] }
+      },
+      "createdAt": "2024-01-15T10:00:00Z",
+      "updatedAt": "2024-01-15T10:00:00Z"
+    }
+  ],
+  "doctorHolidays": [
+    {
+      "id": "1",
+      "doctorId": "03b9d4db-1c95-18a6-95cb-b724d4048bee",
+      "date": "2024-02-25",
+      "reason": "Personal Leave",
+      "createdAt": "2024-01-15T10:00:00Z"
+    },
+    {
+      "id": "2",
+      "doctorId": "03b9d4db-1c95-18a6-95cb-b724d4048bee",
+      "date": "2024-03-01",
+      "reason": "Conference",
+      "createdAt": "2024-01-15T10:00:00Z"
+    }
+  ],
   "other_fields": [
     {
       "id": "1",

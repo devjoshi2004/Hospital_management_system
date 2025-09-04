@@ -89,7 +89,7 @@ const Appointments = () => {
                       <button className="text-green-600 hover:text-green-800" onClick={() => console.log("confirmed")}>
                         <CheckCircle className="w-5 h-5" />
                       </button>
-                      <button className="text-red-600 hover:text-red-800" onClick={() => console.log("cancelled")}>
+                      <button className="text-red-600 hover:text-red-800" onClick={() => console.log("declined")}>
                         <XCircle className="w-5 h-5" />
                       </button>
                     </div>
