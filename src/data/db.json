@@ -77,6 +77,104 @@
     }
   ],
   "appointment": [],
+  "doctorSchedule": [
+    {
+      "doctorId": "03b9d4db-1c95-18a6-95cb-b724d4048bee",
+      "schedule": {
+        "monday": {
+          "isWorking": true,
+          "slots": [
+            "10:00 AM - 12:00 PM"
+          ]
+        },
+        "tuesday": {
+          "isWorking": true,
+          "slots": [
+            "09:00 AM - 01:00 PM"
+          ]
+        },
+        "wednesday": {
+          "isWorking": true,
+          "slots": [
+            "09:00 AM - 01:00 PM"
+          ]
+        },
+        "thursday": {
+          "isWorking": true,
+          "slots": [
+            "09:00 AM - 01:00 PM",
+            "02:00 PM - 06:00 PM"
+          ]
+        },
+        "friday": {
+          "isWorking": true,
+          "slots": [
+            "09:00 AM - 01:00 PM",
+            "02:00 PM - 06:00 PM"
+          ]
+        },
+        "saturday": {
+          "isWorking": false,
+          "slots": []
+        },
+        "sunday": {
+          "isWorking": false,
+          "slots": []
+        }
+      },
+      "id": "1"
+    },
+    {
+      "id": "50fa",
+      "doctorId": "4e3bf2e8-7f7d-9cdf-1c39-e6f2c795b3b0",
+      "schedule": {
+        "monday": {
+          "isWorking": true,
+          "slots": [
+            "09:00 AM - 01:00 PM",
+            "02:00 PM - 06:00 PM"
+          ]
+        },
+        "tuesday": {
+          "isWorking": true,
+          "slots": [
+            "09:00 AM - 01:00 PM",
+            "02:00 PM - 06:00 PM"
+          ]
+        },
+        "wednesday": {
+          "isWorking": true,
+          "slots": [
+            "09:00 AM - 01:00 PM",
+            "02:00 PM - 06:00 PM"
+          ]
+        },
+        "thursday": {
+          "isWorking": true,
+          "slots": [
+            "09:00 AM - 01:00 PM",
+            "02:00 PM - 06:00 PM"
+          ]
+        },
+        "friday": {
+          "isWorking": true,
+          "slots": [
+            "09:00 AM - 01:00 PM",
+            "02:00 PM - 06:00 PM"
+          ]
+        },
+        "saturday": {
+          "isWorking": false,
+          "slots": []
+        },
+        "sunday": {
+          "isWorking": false,
+          "slots": []
+        }
+      }
+    }
+  ],
+  "doctorHolidays": [],
   "other_fields": [
     {
       "id": "1",

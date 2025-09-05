@@ -33,7 +33,6 @@ const LoginForm = () => {
       [e.target.name]: e.target.value,
     });
     if(formData.role){
-      console.log("🚀 ~ handleChange ~ formData.role:", formData.role)
       setError("");
     }
   };

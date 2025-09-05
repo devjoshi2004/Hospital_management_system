@@ -12,7 +12,7 @@ const DoctorAppointments = () => {
       date: '2024-02-25',
       time: '10:00 AM',
       type: 'Regular Checkup',
-      status: 'Pending',
+      status: 'Declined',
       phone: '+1 (555) 123-4567',
       notes: 'First time visit',
     },
@@ -104,8 +104,10 @@ const DoctorAppointments = () => {
                       <span
                         className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
                           appointment.status === 'Confirmed'
-                            ? 'bg-green-100 text-green-800'
-                            : 'bg-yellow-100 text-yellow-800'
+                            ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
+                            : appointment.status === 'Declined'
+                            ? 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
+                            : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
                         }`}
                       >
                         {appointment.status}
@@ -131,7 +133,7 @@ const DoctorAppointments = () => {
                           <CheckCircle className="w-5 h-5" />
                         </button>
                         <button
-                          onClick={() => handleStatusChange(appointment.id, 'Cancelled')}
+                          onClick={() => handleStatusChange(appointment.id, 'Declined')}
                           className="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300"
                           title="Cancel"
                         >
