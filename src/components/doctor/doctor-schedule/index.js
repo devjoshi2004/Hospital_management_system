@@ -15,8 +15,6 @@ import {
   clearError,
   clearSuccess,
   updateLocalSchedule,
-  addLocalHoliday,
-  removeLocalHoliday,
 } from "@/redux/slices/doctorSlice";
 
 const DoctorSchedule = () => {
@@ -300,12 +298,6 @@ const DoctorSchedule = () => {
                 <div key={day} className="border-b border-gray-200 dark:border-gray-700 pb-4 last:border-0">
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center space-x-3">
-                      <input
-                        type="checkbox"
-                        checked={isWorking}
-                        className="rounded border-gray-300 dark:border-gray-700 text-primary focus:ring-primary"
-                        readOnly
-                      />
                       <span className="font-medium text-gray-900 dark:text-gray-100 capitalize">{day}</span>
                     </div>
                     <button
@@ -342,6 +334,67 @@ const DoctorSchedule = () => {
                 Add Holiday
               </button>
             </div>
+            {/* Holiday Modal */}
+            {showHolidayModal && (
+              <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+                <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg p-6 w-full max-w-md">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Add Holiday</h3>
+                    <button
+                      onClick={() => setShowHolidayModal(false)}
+                      className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                    >
+                      <X className="w-5 h-5" />
+                    </button>
+                  </div>
+                  <form
+                    onSubmit={handleAddHoliday}
+                    className="space-y-4"
+                  >
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                        Date
+                      </label>
+                      <input
+                        type="date"
+                        value={holidayDate}
+                        onChange={e => setHolidayDate(e.target.value)}
+                        className="w-full rounded-md border border-gray-300 dark:border-gray-700 px-3 py-2 focus:border-primary focus:ring-primary bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                        Reason
+                      </label>
+                      <input
+                        type="text"
+                        value={holidayReason}
+                        onChange={e => setHolidayReason(e.target.value)}
+                        placeholder="Reason for holiday"
+                        className="w-full rounded-md border border-gray-300 dark:border-gray-700 px-3 py-2 focus:border-primary focus:ring-primary bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100"
+                        required
+                      />
+                    </div>
+                    <div className="flex justify-end space-x-2 pt-2">
+                      <button
+                        type="button"
+                        onClick={() => setShowHolidayModal(false)}
+                        className="px-4 py-2 rounded-md bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        type="submit"
+                        className="px-4 py-2 rounded-md bg-primary text-white hover:bg-primary/90"
+                      >
+                        Add
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            )}
             <div className="space-y-4">
               {doctorHolidays.map((holiday) => (
                 <div
