@@ -44,14 +44,12 @@ const AddDoctor = () => {
         .then((res) => {
           return res;
         });
-      console.log(addPatient);
     }catch(error){
       console.log("addDoctor", error);
       
     }
 
 
-    console.log("Doctor form submitted:", formData);
     router.push("/admin/doctors");
   };
 

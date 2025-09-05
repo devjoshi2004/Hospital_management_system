@@ -20,6 +20,8 @@ const authSlice = createSlice({
 
       if (typeof window !== "undefined") {
         localStorage.setItem("user", JSON.stringify(action.payload));
+        localStorage.setItem("userId", action.payload.id);
+        localStorage.setItem("userRole", action.payload.role);
       }
     },
     logout: (state) => {
@@ -32,11 +34,19 @@ const authSlice = createSlice({
 
       if (typeof window !== "undefined") {
         localStorage.removeItem("user");
+        localStorage.removeItem("userId");
+        localStorage.removeItem("userRole");
       }
     },
     setUser: (state, action) => {
       state.user = action.payload;
       state.isAuthenticated = !!action.payload;
+      
+      // Also set userId and userRole in localStorage when setting user from cookies
+      if (action.payload && typeof window !== "undefined") {
+        localStorage.setItem("userId", action.payload.id);
+        localStorage.setItem("userRole", action.payload.role);
+      }
     },
   },
 });

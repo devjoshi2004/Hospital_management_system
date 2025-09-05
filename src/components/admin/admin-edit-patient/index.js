@@ -8,7 +8,6 @@ import { useDispatch } from 'react-redux';
 
 const EditPatient = ({patientId}) => {
 
-  // console.log("edit form id ", patientId);
   const [patientData, setPatientData] = useState({
     fullName: "",
     email: "",
@@ -46,7 +45,6 @@ const EditPatient = ({patientId}) => {
         age: patientData.age,
         lastVisit: patientData.lastVisit,
       })
-      console.log(res);
       
     }catch(error){
       console.log("editpatientPage", error);
