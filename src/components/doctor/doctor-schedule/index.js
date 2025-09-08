@@ -46,7 +46,7 @@ const DoctorSchedule = () => {
     sunday: { isWorking: false, slots: [] },
   };
 
-  const schedule = Object.keys(doctorSchedule).length > 0 ? doctorSchedule : defaultSchedule;
+  const schedule = Object.keys(doctorSchedule).length > 0 ? doctorSchedule : "";
 
   // Load doctor data and schedule on component mount
   useEffect(() => {
@@ -357,8 +357,8 @@ const DoctorSchedule = () => {
                       </label>
                       <input
                         type="date"
-                        value={holidayDate}
-                        onChange={e => setHolidayDate(e.target.value)}
+                        value={newHoliday.date}
+                        onChange={e => setNewHoliday({...newHoliday, date: e.target.value})}
                         className="w-full rounded-md border border-gray-300 dark:border-gray-700 px-3 py-2 focus:border-primary focus:ring-primary bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100"
                         required
                       />
@@ -369,8 +369,8 @@ const DoctorSchedule = () => {
                       </label>
                       <input
                         type="text"
-                        value={holidayReason}
-                        onChange={e => setHolidayReason(e.target.value)}
+                        value={newHoliday.reason}
+                        onChange={e => setNewHoliday({...newHoliday, reason: e.target.value})}
                         placeholder="Reason for holiday"
                         className="w-full rounded-md border border-gray-300 dark:border-gray-700 px-3 py-2 focus:border-primary focus:ring-primary bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100"
                         required

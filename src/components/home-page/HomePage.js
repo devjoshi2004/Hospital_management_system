@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { BookOpen, Calendar, User, FileSymlink } from "lucide-react";
+import MultiHeyForm from "../multiple-hey-form";
+import HeyForm from "../multiple-hey-form";
 
 const HomePage = () => {
   const router = useRouter();
@@ -111,9 +113,33 @@ const HomePage = () => {
                   <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
                     {feature.title}
                   </h3>
-                  <p className="text-gray-600 dark:text-gray-300">{feature.description}</p>
+                  <p className="text-gray-600 dark:text-gray-300">
+                    {feature.description}
+                  </p>
                 </div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* MultiHeyForm Section */}
+        <section className="py-16 bg-gray-50 dark:bg-gray-800">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+                Get in Touch
+              </h2>
+              <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+                Have questions or need assistance? Fill out our form and we'll
+                get back to you as soon as possible.
+              </p>
+            </div>
+            <div className="max-w-4xl mx-auto">
+              <HeyForm
+                formId="f2U2o7kF"
+                url="https://heyform.net/f/f2U2o7kF"
+                height="600"
+              />
             </div>
           </div>
         </section>
