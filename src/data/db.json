@@ -33,14 +33,14 @@
     },
     {
       "id": "181e3fee-2220-8e65-4123-03d8c0f5a89a",
-      "fullName": "Brandon Irwin",
-      "email": "vywub@mailinator.com",
+      "fullName": "doctor3",
+      "email": "doctor2@gmail.com",
       "role": "doctor",
-      "phone": "+1 (309) 531-5855",
+      "phone": "5425698563",
       "gender": "male",
       "specialty": "orthopedics",
       "experience": "62",
-      "password": "Pa$$w0rd!"
+      "password": "doctor123"
     }
   ],
   "patient": [
@@ -125,14 +125,12 @@
       "id": "1"
     },
     {
-      "id": "50fa",
-      "doctorId": "4e3bf2e8-7f7d-9cdf-1c39-e6f2c795b3b0",
+      "doctorId": "181e3fee-2220-8e65-4123-03d8c0f5a89a",
       "schedule": {
         "monday": {
           "isWorking": true,
           "slots": [
-            "09:00 AM - 01:00 PM",
-            "02:00 PM - 06:00 PM"
+            "5:34 PM - 4:33 PM"
           ]
         },
         "tuesday": {
@@ -171,10 +169,18 @@
           "isWorking": false,
           "slots": []
         }
-      }
+      },
+      "id": "50fa"
     }
   ],
-  "doctorHolidays": [],
+  "doctorHolidays": [
+    {
+      "id": "2def",
+      "doctorId": "181e3fee-2220-8e65-4123-03d8c0f5a89a",
+      "date": "2025-09-14",
+      "reason": "-"
+    }
+  ],
   "other_fields": [
     {
       "id": "1",

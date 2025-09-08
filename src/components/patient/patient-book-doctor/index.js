@@ -77,7 +77,7 @@ const BookDoctor = () => {
   const getAvailableSlots = (doctor) => {
     if (!selectedDate || !doctorSchedules[doctor.id]) return [];
     
-    const dayName = new Date(selectedDate).toLocaleDateString('en-US', { weekday: 'lowercase' });
+    const dayName = new Date(selectedDate).toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase();
     const daySchedule = doctorSchedules[doctor.id][dayName];
     
     if (!daySchedule || !daySchedule.isWorking) return [];
@@ -89,7 +89,7 @@ const BookDoctor = () => {
   const isDoctorAvailable = (doctor) => {
     if (!selectedDate || !doctorSchedules[doctor.id]) return false;
     
-    const dayName = new Date(selectedDate).toLocaleDateString('en-US', { weekday: 'lowercase' });
+    const dayName = new Date(selectedDate).toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase();
     const daySchedule = doctorSchedules[doctor.id][dayName];
     
     return daySchedule && daySchedule.isWorking && daySchedule.slots.length > 0;
