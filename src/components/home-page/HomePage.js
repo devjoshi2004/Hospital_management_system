@@ -4,8 +4,6 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { BookOpen, Calendar, User, FileSymlink } from "lucide-react";
-import MultiHeyForm from "../multiple-hey-form";
-import HeyForm from "../multiple-hey-form";
 import HeyFormEmbed from "../single-hey-form";
 
 const HomePage = () => {
@@ -136,11 +134,7 @@ const HomePage = () => {
               </p>
             </div>
             <div className="max-w-4xl mx-auto">
-              {/* <HeyForm
-                formId="f2U2o7kF"
-                url="https://heyform.net/f/f2U2o7kF"
-              /> */}
-              <HeyFormEmbed />
+              <HeyFormEmbed url="https://heyform.net/f/f2U2o7kF" />
             </div>
           </div>
         </section>
