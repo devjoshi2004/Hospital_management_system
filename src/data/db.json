@@ -180,37 +180,5 @@
       "date": "2025-09-14",
       "reason": "-"
     }
-  ],
-  "other_fields": [
-    {
-      "id": "1",
-      "module_name": "awards",
-      "fields": [
-        {
-          "field_id": "custom_field_1",
-          "label": "Sponsor Name",
-          "data_type": "text",
-          "value": ""
-        },
-        {
-          "field_id": "custom_field_2",
-          "label": "Award Level",
-          "data_type": "radio",
-          "value": ""
-        },
-        {
-          "field_id": "custom_field_3",
-          "label": "Description",
-          "data_type": "textarea",
-          "value": ""
-        },
-        {
-          "field_id": "custom_field_4",
-          "label": "Nomination Deadline",
-          "data_type": "date",
-          "value": ""
-        }
-      ]
-    }
   ]
 }
