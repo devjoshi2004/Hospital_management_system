@@ -13,16 +13,18 @@ const HeyForm = ({
   type = "standard",
 }) => {
   return (
-    <div
-      data-heyform-id={formId}
-      data-heyform-type={type}
-      data-heyform-custom-url={url}
-      data-heyform-width-type={widthType}
-      data-heyform-width={width}
-      data-heyform-height-type={heightType}
-      data-heyform-height={height}
-      data-heyform-auto-resize-height={autoResize.toString()}
-    />
+    <div className="rounded-xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700">
+      <div
+        data-heyform-id={formId}
+        data-heyform-type={type}
+        data-heyform-custom-url={url}
+        data-heyform-width-type={widthType}
+        data-heyform-width={width}
+        data-heyform-height-type={heightType}
+        data-heyform-height={height}
+        data-heyform-auto-resize-height={autoResize.toString()}
+      />
+    </div>
   );
 };
 
