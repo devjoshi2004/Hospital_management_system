@@ -134,7 +134,7 @@ const HomePage = () => {
               </p>
             </div>
             <div className="max-w-4xl mx-auto">
-              <HeyFormEmbed url="https://heyform.net/f/f2U2o7kF" />
+              <HeyFormEmbed url="f2U2o7kF" />
             </div>
           </div>
         </section>
